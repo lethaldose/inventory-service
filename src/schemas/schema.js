@@ -4,6 +4,7 @@ const s = require('strummer');
 
 exports.SHOPPING_CENTRE_REQUEST = s({
   name: 'string',
+  description: s.optional('string'),
   address: {
     streetNumber: 'string',
     streetName: 'string',
@@ -16,6 +17,9 @@ exports.SHOPPING_CENTRE_REQUEST = s({
     country: s.value('AUS')
   }
 });
+
+
+exports.SHOPPING_CENTRE_ID = s({id: 'string'});
 
 
 exports.ASSET_REQUEST = s({
@@ -40,6 +44,7 @@ exports.ASSET_REQUEST = s({
   wallMounted: s.optional('boolean'),
   interactive: s.optional('boolean'),
   floorStanding: s.optional('boolean'),
+  description: s.optional('string'),
 
   location: {
     floor: 'number',
@@ -52,7 +57,6 @@ exports.ASSET_REQUEST = s({
     nearEntryGate: s.optional('boolean'),
     nearExitGate: s.optional('boolean'),
     gateNumber: s.optional('string'),
-    pillarNumber: s.optional('string'),
-    description: s.optional('string')
+    pillarNumber: s.optional('string')
   }
 });

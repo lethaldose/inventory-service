@@ -13,7 +13,9 @@ exports.create = function(server) {
     schemaValidator.validate({body: schema.SHOPPING_CENTRE_REQUEST}),
     shoppingCentreController.create);
 
-  server.get('/shopping-centre', shoppingCentreController.get)
+  server.get('/shopping-centre',
+    schemaValidator.validate({params: schema.SHOPPING_CENTRE_ID}),
+    shoppingCentreController.get);
 
   server.get('/shopping-centre/:id', (req, res, next) => {
     res.send({});
