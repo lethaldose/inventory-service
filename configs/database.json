@@ -1,0 +1,16 @@
+{
+  "development": {
+    "username": "developer",
+    "password": "developer",
+    "database": "inventory_store_development",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "developer",
+    "password": "developer",
+    "database": "inventory_store_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
