@@ -1,8 +1,5 @@
 'use strict';
 
-const restifyErrors = require('restify-errors');
-const s = require('strummer');
-
 const shoppingCentreController = require('./controllers/shopping-centre');
 const schema = require('./schemas/schema');
 const schemaValidator = require('./schemas/schema-validator');

@@ -2,23 +2,20 @@
 
 const restify = require('restify');
 const restifyPlugins = require('restify-plugins');
-const config  = require('./config');
-const log 		= require('./log');
-const routes  = require('./routes');
 
-const server = restify.createServer({
-	name: config.name
+const server  = require('./server');
+const log     = require('./log');
+
+process.on('uncaughtException', function (err) {
+  log.error('Uncaught exception, shutting down the server');
+  log.error(err);
+  process.exit(1);
 });
 
-server.use(restifyPlugins.jsonBodyParser({ mapParams: true }));
-server.use(restifyPlugins.acceptParser(server.acceptable));
-server.use(restifyPlugins.queryParser({ mapParams: true }));
-
-server.on('uncaughtException', (req, res, route, {name, message, inner, stack}) => {
-	const error = {name, message, inner, stack};
-	log.error(error);
-	res.send(503, new restify.InternalError('Service not available'));
+process.on('unhandledRejection', function (err) {
+  log.error('UNHANDLED REJECTION', err);
 });
 
-routes.create(server);
-server.listen(config.port);
+
+let app = server.create();
+log.info(`Inventory Service Started:: listening at ${app.url}`);

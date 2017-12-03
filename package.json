@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "http-custom-errors": "^8.0.0",
+    "lodash": "^4.17.4",
     "restify": "^6.3.4",
     "restify-errors": "^5.0.0",
     "restify-plugins": "^1.6.0",

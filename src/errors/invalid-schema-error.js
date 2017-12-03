@@ -6,6 +6,7 @@ const util = require('util');
 function InvalidSchemaError(fields) {
   this.message = 'Invalid Request Schema';
   this.fields = fields;
+  this.statusCode = 400;
 }
 
 util.inherits(InvalidSchemaError, HTTPErrors.BadRequestError);

@@ -8,7 +8,6 @@ exports.SHOPPING_CENTRE_REQUEST = s({
   address: {
     streetNumber: 'string',
     streetName: 'string',
-    streetType: 'string',
     suburb: 'string',
     postcode: /^\d{4}$/,
     state: s.enum({
