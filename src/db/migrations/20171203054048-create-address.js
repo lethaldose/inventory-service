@@ -26,7 +26,7 @@ module.exports = {
       country: {
         type: Sequelize.STRING
       },
-      shoppingCentreId: {
+      ShoppingCentreId: {
         type: Sequelize.INTEGER
       },
       createdAt: {

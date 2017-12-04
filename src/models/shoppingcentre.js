@@ -2,12 +2,12 @@
 
 module.exports = (sequelize, DataTypes) => {
   var ShoppingCentre = sequelize.define('ShoppingCentre', {
-    name: DataTypes.STRING
+    name: DataTypes.STRING,
     description: DataTypes.STRING
   }, {
     classMethods: {
       associate: function(models) {
-        ShoppingCentre.hasOne(models.Address, {foreignKey: 'shoppingCentreId' });
+        ShoppingCentre.hasOne(models.Address);
       }
     }
   });
