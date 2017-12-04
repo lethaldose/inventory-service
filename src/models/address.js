@@ -8,12 +8,11 @@ module.exports = (sequelize, DataTypes) => {
     postCode: DataTypes.INTEGER,
     state: DataTypes.STRING,
     country: DataTypes.STRING,
-  }, {
-    classMethods: {
-      associate: function(models) {
-        Address.belongsTo(models.ShoppingCentre);
-      }
-    }
   });
+
+  Address.associate = function(models) {
+    Address.belongsTo(models.ShoppingCentre);
+  };
+
   return Address;
 };
