@@ -56,9 +56,9 @@ describe('INTEGRATION::ShoppingCentre Controller', () => {
       .end(function(err, res) {
         if (err) return done(err);
         let shoppingCentre = res.body;
-        shoppingCentre.id.should.eql(existingShoppingCentre.id)
-        shoppingCentre.name.should.eql(existingShoppingCentre.name)
-        shoppingCentre.address.should.eql(requestAttrs.Address)
+        shoppingCentre.id.should.eql(existingShoppingCentre.id);
+        shoppingCentre.name.should.eql(existingShoppingCentre.name);
+        shoppingCentre.address.should.eql(requestAttrs.Address);
         done();
       });
     });
@@ -102,7 +102,7 @@ describe('INTEGRATION::ShoppingCentre Controller', () => {
       .end(function(err, res) {
         if (err) return done(err);
 
-        res.body.id.should.be.a.Number()
+        res.body.id.should.be.a.Number();
         let responseAttrs = _.omit(res.body, 'id');
         responseAttrs.should.eql(requestParams);
         done();
@@ -136,7 +136,7 @@ describe('INTEGRATION::ShoppingCentre Controller', () => {
       .expect(400)
       .expect('Content-Type', /json/)
       .end(function(err, res) {
-        res.body.should.eql(errorResponse)
+        res.body.should.eql(errorResponse);
         done();
       });
     });

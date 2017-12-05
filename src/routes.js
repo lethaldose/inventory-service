@@ -19,7 +19,7 @@ exports.create = function(server) {
     schemaValidator.validate({body: schema.CREATE_ASSET_REQUEST}),
     assetsController.create );
 
-  server.put('/assets/id',
+  server.put('/assets/:id',
     schemaValidator.validate({body: schema.UPDATE_ASSET_REQUEST}),
     assetsController.update );
 

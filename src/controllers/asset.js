@@ -22,15 +22,23 @@ exports.create = function(req, res, next) {
 };
 
 exports.update = function(req, res, next) {
+  let id = req.params.id;
   let reqAttributes = req.body;
 
-  return Asset.create(reqAttributes)
-  .then ( (newAsset) => {
-    res.send(201, AssetResponse.transform(newAsset));
+  return Asset.findById(id)
+  .then( (assetDetails) => {
+    if(_.isEmpty(assetDetails)) {
+      next(new restifyErrors.NotFoundError());
+      return;
+    }
+    return assetDetails.update(reqAttributes);
+  })
+  .then ( (assetDetails) => {
+    res.send(200, AssetResponse.transform(assetDetails));
     next();
   }).catch( (err) => {
     log.error(err);
-    let errorMsg = `Error creating new Asset ${err.message}`;
+    let errorMsg = `Error updating Asset ${err.message}`;
     next(new restifyErrors.BadRequestError({message: errorMsg}));
   });
 };
@@ -38,9 +46,9 @@ exports.update = function(req, res, next) {
 
 exports.get = function(req, res, next) {
   let id = req.params.id;
+
   return Asset.findById(id)
   .then( (assetDetails) => {
-
     if(_.isEmpty(assetDetails)) {
       next(new restifyErrors.NotFoundError());
       return;

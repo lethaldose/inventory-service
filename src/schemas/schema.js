@@ -27,7 +27,7 @@ exports.CREATE_ASSET_REQUEST = s({
     values: ['active', 'inactive']
   }),
 
-  screenDimensions: {
+  dimensions: {
     height: 'number',
     width: 'number',
     unit: s.enum({
@@ -61,4 +61,11 @@ exports.CREATE_ASSET_REQUEST = s({
     gateNumber: s.optional('string'),
     pillarNumber: s.optional('string')
   }
+});
+
+
+exports.UPDATE_ASSET_REQUEST = s({
+  status: s.enum({
+    values: ['active', 'inactive']
+  })
 });
