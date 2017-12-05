@@ -21,35 +21,38 @@ exports.SHOPPING_CENTRE_REQUEST = s({
 exports.SHOPPING_CENTRE_ID = s({id: 'string'});
 
 
-exports.ASSET_REQUEST = s({
+exports.CREATE_ASSET_REQUEST = s({
   name: 'string',
   status: s.enum({
-    values: ['Active', 'Inactive']
+    values: ['active', 'inactive']
   }),
 
   screenDimensions: {
     height: 'number',
     width: 'number',
+    unit: s.enum({
+      values: ['cm', 'inch']
+    })
   },
 
-  adSpotLength: 'number',
-  maxAdvertisers: 'number',
-  maxAdLoopTime: {
+  adSpotLength: s.optional('number'),
+  maxAdvertisers: s.optional('number'),
+  maxAdLoopTime: s.optional({
     value: 'number',
     unit: 'string'
-  },
-  dailyFootfall: 'number',
+  }),
+  dailyFootfall: s.optional('number'),
   beaconRFIDEnabled: s.optional('boolean'),
   wallMounted: s.optional('boolean'),
   interactive: s.optional('boolean'),
   floorStanding: s.optional('boolean'),
-  description: s.optional('string'),
 
   location: {
-    floor: 'number',
-    mainCorridor: 'boolean',
-    isParking: 'boolean',
-    isFoodCourt: 'boolean',
+    floor: 'string',
+    description: s.optional('string'),
+    mainCorridor: s.optional('boolean'),
+    isParking: s.optional('boolean'),
+    isFoodCourt: s.optional('boolean'),
     nearShop: s.optional('boolean'),
     shopName: s.optional('string'),
     shopNumber: s.optional('string'),

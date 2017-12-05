@@ -3,7 +3,7 @@
 const sinon = require('sinon');
 const controller = require(`${global.SRC}/controllers/shopping-centre`);
 const db = require(`${global.SRC}/models/db`);
-var ShoppingCentre = db.ShoppingCentre;
+let ShoppingCentre = db.ShoppingCentre;
 
 describe('Controller: ShoppingCentre', () => {
 
@@ -20,64 +20,67 @@ describe('Controller: ShoppingCentre', () => {
 
   describe('get', () => {
 
-    it('should return a shopping centre for an id', () => {
-      let shoppingCentreDetails = {name: 'Westfield'};
+    beforeEach(() => {
+      sinon.stub(ShoppingCentre, 'findById')
+    })
+
+    afterEach( () => {
+      ShoppingCentre.findById.restore();
+    })
+
+    it('should return a shopping centre for an id', (done) => {
+      let shoppingCentreDetails = {name: 'Westfield', Address: { state: 'NSW'}};
+      let shoppingCentreResponse = {name: 'Westfield', address: { state: 'NSW'}};
+      let shoppingCentreModelStub = { toJSON: () => {return shoppingCentreDetails; }};
       request = {params: {id: '999'}}
-      controller.get(request, fakeResponse, fakeNext);
-      fakeResponse.send.should.have.been.calledWith(200, shoppingCentreDetails);
-      fakeNext.should.have.been.called();
+      ShoppingCentre.findById.returns(Promise.resolve(shoppingCentreModelStub));
+
+      controller.get(request, fakeResponse, fakeNext).then( () => {
+        fakeResponse.send.should.have.been.calledWith(200, shoppingCentreResponse);
+        fakeNext.should.have.been.called();
+        done();
+      }).catch(done);
+
     });
 
   });
 
   describe('create', () => {
 
+    beforeEach(() => {
+      sinon.stub(ShoppingCentre, 'createWithAddress');
+    });
+
     afterEach( () => {
       ShoppingCentre.createWithAddress.restore();
     })
 
     it('should create a new shopping centre', (done) => {
-      request.body = {
-        name: 'Westfield',
-        address: {
-          streetNumber: '11',
-          streetName: 'Victoria',
-          suburb: 'Chatswood',
-          postCode: 2065,
-          state: 'NSW',
-          country: 'AUS'
-        }
-      };
+      let shoppingCentreModel = {name: 'Westfield', Address: { state: 'NSW'}};
+      let shoppingCentreDetail = {name: 'Westfield', address: { state: 'NSW'}};
+      let shoppingCentreModelStub = { toJSON: () => {return shoppingCentreModel; }};
+      request.body = shoppingCentreDetail
 
-      let shoppingCentreDetails = {id: "999"};
-      sinon.stub(ShoppingCentre, 'createWithAddress').returns(Promise.resolve(shoppingCentreDetails));
+      ShoppingCentre.createWithAddress.returns(Promise.resolve(shoppingCentreModelStub));
 
       controller.create(request, fakeResponse, fakeNext).then ( () =>  {
         fakeNext.should.have.been.called();
-        ShoppingCentre.createWithAddress.should.have.been.calledWith(request.body);
-        fakeResponse.send.should.have.been.calledWith(201, shoppingCentreDetails);
+        ShoppingCentre.createWithAddress.should.have.been.calledWith(shoppingCentreModel);
+        fakeResponse.send.should.have.been.calledWith(201, shoppingCentreDetail);
         done();
       }).catch(done);
     });
 
     it('should give an error for bad request', (done) => {
-      request.body = {
-        name: 'Westfield',
-        address: {
-          streetNumber: '11',
-          streetName: 'Victoria',
-          suburb: 'Chatswood',
-          postCode: 2065,
-          state: 'NSW',
-          country: 'AUS'
-        }
-      };
 
-      sinon.stub(ShoppingCentre, 'createWithAddress')
-      .returns(Promise.reject({error: 'invalid req'}));
+      let shoppingCentreModel = {name: 'Westfield', Address: { state: 'NSW'}};
+      let shoppingCentreDetail = {name: 'Westfield', address: { state: 'NSW'}};
+      let shoppingCentreModelStub = { toJSON: () => {return shoppingCentreModel; }};
+      request.body = shoppingCentreDetail
+      ShoppingCentre.createWithAddress.returns(Promise.reject({error: 'invalid req'}));
 
       controller.create(request, fakeResponse, fakeNext).then ( () =>  {
-        ShoppingCentre.createWithAddress.should.have.been.calledWith(request.body);
+        ShoppingCentre.createWithAddress.should.have.been.calledWith(shoppingCentreModel);
         fakeNext.should.have.been.calledWithMatch({statusCode: 400});
         done();
       });

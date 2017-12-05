@@ -24,7 +24,7 @@ exports.create = function(req, res, next) {
 
 exports.get = function(req, res, next) {
   let id = req.params.id
-  ShoppingCentre.findById(id)
+  return ShoppingCentre.findById(id)
   .then( (shoppingCentreDetails) => {
     if(_.isEmpty(shoppingCentreDetails)) {
       next(new restifyErrors.NotFoundError());

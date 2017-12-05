@@ -18,8 +18,24 @@ Refer `src/schemas/schema.js` for detailed JSON schema.
 2. Asset:
     - An asset has name, description
     - It also has physical dimension attributes
-    - It has properties describing its configuration - adSpotLength, maxAdLoopTime, maxAdvertisers etc
+    - It has properties describing its configuration and capability - adSpotLength, maxAdLoopTime, maxAdvertisers, beaconRFIDEnabled etc.
     - It has properties which describe its pyhysical location in the shopping-centre like: floor, mainCorridor, shopNumber etc.
+    - It has properties to describe how asset is displayed or mounted
+
+## Environment Requirement
+
+-   Node 6.10 (node 6 should work fine too)
+-   Postgresql 9.6 (9.4 and above should work too)
+
+## API
+
+| Path                                                    | Method |
+| ------------------------------------------------------- | ------ |
+| /shopping-centres/{id}                                  | GET    |
+| /shopping-centres                                       | POST   |
+| /assets/{id}                                            | GET    |
+| /assets                                                 | POST   |
+
 
 ## Project Structure
 
@@ -29,20 +45,8 @@ Refer `src/schemas/schema.js` for detailed JSON schema.
 |      ├── schemas - request/response parsers and schema validators
 |      ├── models
 |      ├── controllers
-├── test - integration and unit tests
+├── test - integration and unit tests (using mocha/shouldjs)
 ```
-
-## Environment Requirement
-
--   Node 6.10 (node 6 should work fine too)
--   Postgresql 9.6 (9.4 and above should work too)
-
-## API
-
-| Path                                                   | Method |
-| ------------------------------------------------------ | ------ |
-| /shopping-centre/{id}                                  | GET    |
-| /shopping-centre                                       | POST   |
 
 ## Quick Start
 
@@ -61,3 +65,9 @@ Refer `src/schemas/schema.js` for detailed JSON schema.
     - `NODE_ENV=test node_modules/.bin/sequelize db:migrate`
 3. `npm test` to run tests
 
+## Pending Improvements
+1. Enhance Asset model. Schema allows for more properties on the object
+2. Docs using Swagger
+3. More tests
+4. DB improvments
+    - whitelisting before saving json attributes for asset

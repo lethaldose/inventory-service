@@ -8,6 +8,7 @@ module.exports = (sequelize, DataTypes) => {
 
   ShoppingCentre.associate = function(models) {
       ShoppingCentre.hasOne(models.Address);
+      ShoppingCentre.hasMany(models.Asset);
   };
 
   ShoppingCentre.createWithAddress = function(attributes) {

@@ -24,7 +24,7 @@ describe('INTEGRATION::ShoppingCentre Controller', () => {
     }).then(done);
   });
 
-  describe.only('Get shopping centre', () => {
+  describe('Get shopping centre', () => {
 
     let existingShoppingCentre, requestAttrs;
 
@@ -50,7 +50,7 @@ describe('INTEGRATION::ShoppingCentre Controller', () => {
 
     it('should get by id', (done) => {
       request(app)
-      .get(`/shopping-centre/${existingShoppingCentre.id}`)
+      .get(`/shopping-centres/${existingShoppingCentre.id}`)
       .expect(200)
       .expect('Content-Type', /json/)
       .end(function(err, res) {
@@ -65,7 +65,7 @@ describe('INTEGRATION::ShoppingCentre Controller', () => {
 
   it('should give error for invalid id', (done) => {
       request(app)
-      .get('/shopping-centre/999189903')
+      .get('/shopping-centres/999189903')
       .expect(404)
       .expect('Content-Type', /json/)
       .end(function(err, res) {
@@ -95,7 +95,7 @@ describe('INTEGRATION::ShoppingCentre Controller', () => {
 
 
       request(app)
-      .post(`/shopping-centre/`)
+      .post(`/shopping-centres/`)
       .send(requestParams)
       .expect(201)
       .expect('Content-Type', /json/)
@@ -131,7 +131,7 @@ describe('INTEGRATION::ShoppingCentre Controller', () => {
       };
 
       request(app)
-      .post(`/shopping-centre/`)
+      .post(`/shopping-centres/`)
       .send(requestParams)
       .expect(400)
       .expect('Content-Type', /json/)
