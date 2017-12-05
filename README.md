@@ -100,7 +100,6 @@ Refer `src/schemas/schema.js` for detailed JSON schema.
 curl -X POST \
   http://localhost:3000/authenticate \
   -H 'content-type: application/json' \
-  -H 'postman-token: 0dbebd8a-3d43-1702-ac47-fbdd259e54bd' \
   -d '{
   "username": "testuser1",
   "password": "dummy"
