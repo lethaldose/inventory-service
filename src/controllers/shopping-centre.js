@@ -23,7 +23,7 @@ exports.create = function(req, res, next) {
 };
 
 exports.get = function(req, res, next) {
-  let id = req.params.id
+  let id = req.params.id;
   return ShoppingCentre.findById(id)
   .then( (shoppingCentreDetails) => {
     if(_.isEmpty(shoppingCentreDetails)) {

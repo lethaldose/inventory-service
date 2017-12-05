@@ -56,6 +56,8 @@ Refer `src/schemas/schema.js` for detailed JSON schema.
     - `createdb inventory_store_development`
     - `node_modules/.bin/sequelize db:migrate`
 4. Run `npm start` to start the app
+5. Run `npm test` to run specs
+6. Run `npm lint` to run es6 linter
 
 ## Testing
 

@@ -1,4 +1,5 @@
 'use strict';
+
 module.exports = (sequelize, DataTypes) => {
   var Asset = sequelize.define('Asset', {
     name: DataTypes.STRING,
@@ -18,5 +19,6 @@ module.exports = (sequelize, DataTypes) => {
   Asset.findByShoppingCentreId = function(id) {
     return Asset.findAll({ where: {ShoppingCentreId:id}});
   };
+
   return Asset;
 };

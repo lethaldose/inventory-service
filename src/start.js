@@ -1,8 +1,5 @@
 'use strict';
 
-const restify = require('restify');
-const restifyPlugins = require('restify-plugins');
-
 const server  = require('./server');
 const log     = require('./log');
 

@@ -24,4 +24,4 @@ exports.create = () => {
   routes.create(server);
   server.listen(config.port);
   return server;
-}
+};

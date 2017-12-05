@@ -8,7 +8,7 @@ const hasErrors = (object, matcher) => {
   if (matcher) {
     return matcher.match(object);
   }
-}
+};
 
 exports.validate = (schemaOptions = {}) => {
   let bodyMatcher = schemaOptions.body ? s(schemaOptions.body) : null;
@@ -20,7 +20,8 @@ exports.validate = (schemaOptions = {}) => {
 
     if (errorFields.length > 0) {
       return next(new InvalidSchemaError(errorFields));
-    };
+    }
+
     return next();
   };
 };

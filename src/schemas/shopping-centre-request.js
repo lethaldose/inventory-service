@@ -7,4 +7,4 @@ exports.parse = (requestParams) => {
   modelAttributes.Address = modelAttributes.address;
   delete(modelAttributes.address);
   return modelAttributes;
-}
+};
