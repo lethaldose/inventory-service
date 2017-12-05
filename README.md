@@ -61,6 +61,20 @@ Refer `src/schemas/schema.js` for detailed JSON schema.
 5. Run `npm test` to run specs
 6. Run `npm lint` to run es6 linter
 
+## Config
+1. App config.js at `src/config.js`
+2. DB config at `configs/database.json`
+
+## Database
+
+1. Create db user `CREATE USER developer WITH PASSWORD 'developer';`
+2. Create dev db
+    - From psql cli - `CREATE DATABASE inventory_store_development;`
+    - OR from terminal `createdb inventory_store_development`
+3. grant access
+    - `GRANT ALL PRIVILEGES ON DATABASE inventory_store_development to developer;`
+4. Run migrations `node_modules/.bin/sequelize db:migrate`
+
 ## Testing
 
 1. There are unit test and integration tests for controller and models

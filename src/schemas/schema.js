@@ -69,3 +69,9 @@ exports.UPDATE_ASSET_REQUEST = s({
     values: ['active', 'inactive']
   })
 });
+
+
+exports.AUTHENTICATE_REQUEST = s({
+  username: 'string',
+  password: 'string'
+});

@@ -2,6 +2,7 @@
 
 const shoppingCentreController = require('./controllers/shopping-centre');
 const assetsController = require('./controllers/asset');
+const authController = require('./controllers/authentication');
 const schema = require('./schemas/schema');
 const schemaValidator = require('./schemas/schema-validator');
 
@@ -26,4 +27,8 @@ exports.create = function(server) {
     assetsController.update );
 
   server.get('/assets/:id', assetsController.get);
+
+  server.post('/authenticate',
+    schemaValidator.validate({body: schema.AUTHENTICATE_REQUEST}),
+    authController.authenticate );
 };
