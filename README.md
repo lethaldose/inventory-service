@@ -23,6 +23,11 @@ Refer `src/schemas/schema.js` for detailed JSON schema.
     - It has properties which describe its pyhysical location in the shopping-centre like: floor, mainCorridor, shopNumber etc.
     - It has properties to describe how asset is displayed or mounted
 
+
+
+## Authentication
+1. Uses jwt for authenticating requests. Token is set `x-access-token` in request header
+
 ## Environment Requirement
 
 -   Node 6.10 (node 6 should work fine too)
