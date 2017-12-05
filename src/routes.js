@@ -8,16 +8,11 @@ exports.create = function(server) {
 
   server.post('/shopping-centre',
     schemaValidator.validate({body: schema.SHOPPING_CENTRE_REQUEST}),
-    shoppingCentreController.create);
+    shoppingCentreController.create );
 
-  server.get('/shopping-centre',
+  server.get('/shopping-centre/:id',
     schemaValidator.validate({params: schema.SHOPPING_CENTRE_ID}),
     shoppingCentreController.get);
-
-  server.get('/shopping-centre/:id', (req, res, next) => {
-    res.send({});
-    next();
-  });
 
   server.put('/shopping-centre/:id', (req, res, next) => {
     res.send(200, {});

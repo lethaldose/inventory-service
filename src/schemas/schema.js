@@ -9,7 +9,7 @@ exports.SHOPPING_CENTRE_REQUEST = s({
     streetNumber: 'string',
     streetName: 'string',
     suburb: 'string',
-    postcode: /^\d{4}$/,
+    postCode: s.number({min: 1000, max: 9999}),
     state: s.enum({
       values: ['NSW', 'ACT', 'QLD', 'VIC', 'WA', 'SA', 'TAS']
     }),

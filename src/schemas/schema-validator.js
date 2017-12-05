@@ -21,5 +21,6 @@ exports.validate = (schemaOptions = {}) => {
     if (errorFields.length > 0) {
       return next(new InvalidSchemaError(errorFields));
     };
+    return next();
   };
 };
