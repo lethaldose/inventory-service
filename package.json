@@ -4,7 +4,7 @@
   "description": "Shopping Center inventory management Restful Api",
   "main": "index.js",
   "scripts": {
-    "lint": "./node_modules/.bin/eslint --max-warnings=0 src --ignore-pattern 'src/db/**' ",
+    "lint": "./node_modules/.bin/eslint --max-warnings=0 {src,test} --ignore-pattern 'src/db/**' ",
     "start": "node src/start.js",
     "test": "node_modules/.bin/mocha test --exit"
   },

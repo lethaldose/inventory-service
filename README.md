@@ -33,8 +33,10 @@ Refer `src/schemas/schema.js` for detailed JSON schema.
 | ------------------------------------------------------- | ------ |
 | /shopping-centres/{id}                                  | GET    |
 | /shopping-centres                                       | POST   |
+| /shopping-centres/{id}/assets                           | GET    |
 | /assets/{id}                                            | GET    |
 | /assets                                                 | POST   |
+| /assets/{id}                                            | PUT    |
 
 
 ## Project Structure
@@ -75,3 +77,4 @@ Refer `src/schemas/schema.js` for detailed JSON schema.
      - improve test setup
 5. DB improvments
     - whitelisting attributes to update at model level
+    - fix foreignKey ShoppingCentreId to be lowercase

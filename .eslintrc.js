@@ -12,6 +12,8 @@ module.exports = {
           "error",
           "unix"
       ],
+      "no-undefined": 2,
+      "no-undef": 0,
       "quotes": [
           "error",
           "single"

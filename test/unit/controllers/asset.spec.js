@@ -32,7 +32,7 @@ describe('Controller: Asset', () => {
 
       let assetDetails = {name: 'Asset-B1'};
       let assetModelStub = { toJSON: () => {return assetDetails; }};
-      request = {params: {id: '999'}}
+      request = {params: {id: '999'}};
       Asset.findById.returns(Promise.resolve(assetModelStub));
 
       controller.get(request, fakeResponse, fakeNext).then( () => {
@@ -70,9 +70,9 @@ describe('Controller: Asset', () => {
         }
       };
 
-      let assetDetails = {name: "Asset1"};
+      let assetDetails = {name: 'Asset1'};
       let assetModelStub = { toJSON: () => {return assetDetails; }};
-      request.body = assetDetails
+      request.body = assetDetails;
       Asset.create.returns(Promise.resolve(assetModelStub));
 
       controller.create(request, fakeResponse, fakeNext).then ( () =>  {

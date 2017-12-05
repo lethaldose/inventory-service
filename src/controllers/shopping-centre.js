@@ -7,6 +7,7 @@ const db = require('../models/db');
 const ShoppingCentre = db.ShoppingCentre;
 const ShoppingCentreResponse = require('../schemas/shopping-centre-response');
 const ShoppingCentreRequest = require('../schemas/shopping-centre-request');
+const AssetResponse = require('../schemas/asset-response');
 
 exports.create = function(req, res, next) {
   let reqAttributes = ShoppingCentreRequest.parse(req.body);
@@ -32,6 +33,27 @@ exports.get = function(req, res, next) {
     }
 
     res.send(200, ShoppingCentreResponse.transform(shoppingCentreDetails));
+    next();
+  }).catch( (err) => {
+    log.error(err);
+    next(new restifyErrors.NotFoundError());
+  });
+};
+
+exports.getAssets = function(req, res, next) {
+  let id = req.params.id;
+  let existingShoppingCentre;
+
+  return ShoppingCentre.findById(id)
+  .then( (shoppingCentreDetails) => {
+    if(_.isEmpty(shoppingCentreDetails)) {
+      next(new restifyErrors.NotFoundError());
+      return;
+    }
+    existingShoppingCentre = shoppingCentreDetails;
+    return existingShoppingCentre.getAssets();
+  }).then( (assetList) => {
+    res.send(200, AssetResponse.transformList(assetList));
     next();
   }).catch( (err) => {
     log.error(err);

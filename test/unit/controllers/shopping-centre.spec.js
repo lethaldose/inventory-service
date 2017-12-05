@@ -21,18 +21,18 @@ describe('Controller: ShoppingCentre', () => {
   describe('get', () => {
 
     beforeEach(() => {
-      sinon.stub(ShoppingCentre, 'findById')
-    })
+      sinon.stub(ShoppingCentre, 'findById');
+    });
 
     afterEach( () => {
       ShoppingCentre.findById.restore();
-    })
+    });
 
     it('should return a shopping centre for an id', (done) => {
       let shoppingCentreDetails = {name: 'Westfield', Address: { state: 'NSW'}};
       let shoppingCentreResponse = {name: 'Westfield', address: { state: 'NSW'}};
       let shoppingCentreModelStub = { toJSON: () => {return shoppingCentreDetails; }};
-      request = {params: {id: '999'}}
+      request = {params: {id: '999'}};
       ShoppingCentre.findById.returns(Promise.resolve(shoppingCentreModelStub));
 
       controller.get(request, fakeResponse, fakeNext).then( () => {
@@ -53,13 +53,13 @@ describe('Controller: ShoppingCentre', () => {
 
     afterEach( () => {
       ShoppingCentre.createWithAddress.restore();
-    })
+    });
 
     it('should create a new shopping centre', (done) => {
       let shoppingCentreModel = {name: 'Westfield', Address: { state: 'NSW'}};
       let shoppingCentreDetail = {name: 'Westfield', address: { state: 'NSW'}};
       let shoppingCentreModelStub = { toJSON: () => {return shoppingCentreModel; }};
-      request.body = shoppingCentreDetail
+      request.body = shoppingCentreDetail;
 
       ShoppingCentre.createWithAddress.returns(Promise.resolve(shoppingCentreModelStub));
 
@@ -75,8 +75,7 @@ describe('Controller: ShoppingCentre', () => {
 
       let shoppingCentreModel = {name: 'Westfield', Address: { state: 'NSW'}};
       let shoppingCentreDetail = {name: 'Westfield', address: { state: 'NSW'}};
-      let shoppingCentreModelStub = { toJSON: () => {return shoppingCentreModel; }};
-      request.body = shoppingCentreDetail
+      request.body = shoppingCentreDetail;
       ShoppingCentre.createWithAddress.returns(Promise.reject({error: 'invalid req'}));
 
       controller.create(request, fakeResponse, fakeNext).then ( () =>  {

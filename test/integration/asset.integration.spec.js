@@ -1,6 +1,5 @@
 'use strict';
 
-const sinon = require('sinon');
 const request = require('supertest');
 const _ = require('lodash');
 
@@ -71,8 +70,7 @@ describe('INTEGRATION::Asset Controller', () => {
     };
 
     return Asset.create(attributes);
-  }
-
+  };
 
   describe('Get asset', () => {
     let existingAsset;
@@ -84,7 +82,7 @@ describe('INTEGRATION::Asset Controller', () => {
         done();
       });
 
-    })
+    });
 
     it('should get by id', (done) => {
       request(app)
@@ -107,7 +105,7 @@ describe('INTEGRATION::Asset Controller', () => {
       .get('/assets/999189903')
       .expect(404)
       .expect('Content-Type', /json/)
-      .end(function(err, res) {
+      .end(function(err) {
         if (err) return done(err);
         done();
       });
@@ -133,14 +131,14 @@ describe('INTEGRATION::Asset Controller', () => {
       };
 
       request(app)
-      .post(`/assets/`)
+      .post('/assets/')
       .send(requestParams)
       .expect(201)
       .expect('Content-Type', /json/)
       .end(function(err, res) {
         if (err) return done(err);
 
-        res.body.id.should.be.a.Number()
+        res.body.id.should.be.a.Number();
         let responseAttrs = _.omit(res.body, 'id');
         responseAttrs.should.eql(requestParams);
         done();
@@ -160,7 +158,7 @@ describe('INTEGRATION::Asset Controller', () => {
         done();
       });
 
-    })
+    });
 
     it('should set asset to inactive', (done) => {
       let requestParams = {
@@ -175,7 +173,7 @@ describe('INTEGRATION::Asset Controller', () => {
       .end(function(err, res) {
         if (err) return done(err);
 
-        res.body.status.should.eql('inactive')
+        res.body.status.should.eql('inactive');
         done();
       });
     });

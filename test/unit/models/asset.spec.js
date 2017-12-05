@@ -1,7 +1,5 @@
 'use strict';
 
-const sinon = require('sinon');
-
 const db = require(`${global.SRC}/models/db`);
 const ShoppingCentre = db.ShoppingCentre;
 const Asset = db.Asset;
@@ -70,8 +68,8 @@ describe('Model:: Asset',  function() {
     Asset.create(attributes)
     .then(function(newAsset) {
       newAsset.id.should.be.Number();
-      newAsset.dimensions.should.have.properties(['height', 'width', 'unit'])
-      newAsset.location.should.have.properties(['floor', 'mainCorridor', 'isFoodCourt', 'nearShop', 'shopName', 'gateNumber'])
+      newAsset.dimensions.should.have.properties(['height', 'width', 'unit']);
+      newAsset.location.should.have.properties(['floor', 'mainCorridor', 'isFoodCourt', 'nearShop', 'shopName', 'gateNumber']);
       done();
     }).catch(done);
 

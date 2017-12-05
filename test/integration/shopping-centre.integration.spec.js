@@ -1,6 +1,5 @@
 'use strict';
 
-const sinon = require('sinon');
 const request = require('supertest');
 const _ = require('lodash');
 
@@ -68,7 +67,7 @@ describe('INTEGRATION::ShoppingCentre Controller', () => {
       .get('/shopping-centres/999189903')
       .expect(404)
       .expect('Content-Type', /json/)
-      .end(function(err, res) {
+      .end(function(err) {
         if (err) return done(err);
         done();
       });
@@ -95,7 +94,7 @@ describe('INTEGRATION::ShoppingCentre Controller', () => {
 
 
       request(app)
-      .post(`/shopping-centres/`)
+      .post('/shopping-centres/')
       .send(requestParams)
       .expect(201)
       .expect('Content-Type', /json/)
@@ -116,22 +115,22 @@ describe('INTEGRATION::ShoppingCentre Controller', () => {
       };
 
       let errorResponse = {
-        "fields": [
+        'fields': [
           {
-            "message": "should be a string",
-            "path": "name"
+            'message': 'should be a string',
+            'path': 'name'
           },
           {
-            "message": "should be an object",
-            "path": "address"
+            'message': 'should be an object',
+            'path': 'address'
           }
         ],
-        "message": "Invalid Request Schema",
-        "statusCode": 400
+        'message': 'Invalid Request Schema',
+        'statusCode': 400
       };
 
       request(app)
-      .post(`/shopping-centres/`)
+      .post('/shopping-centres/')
       .send(requestParams)
       .expect(400)
       .expect('Content-Type', /json/)

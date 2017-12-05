@@ -1,7 +1,5 @@
 'use strict';
 
-const sinon = require('sinon');
-
 const db = require(`${global.SRC}/models/db`);
 const ShoppingCentre = db.ShoppingCentre;
 
