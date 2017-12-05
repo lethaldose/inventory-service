@@ -5,6 +5,8 @@ const restifyPlugins = require('restify-plugins');
 const config  = require('./config');
 const log 		= require('./log');
 const routes  = require('./routes');
+const verifyToken = require('./middleware/verify-token');
+
 
 exports.create = () => {
   const server = restify.createServer({
@@ -14,6 +16,7 @@ exports.create = () => {
   server.use(restifyPlugins.jsonBodyParser({ mapParams: true }));
   server.use(restifyPlugins.acceptParser(server.acceptable));
   server.use(restifyPlugins.queryParser({ mapParams: true }));
+  server.use(verifyToken);
 
   server.on('uncaughtException', (req, res, route, {name, message, inner, stack}) => {
     const error = {name, message, inner, stack};

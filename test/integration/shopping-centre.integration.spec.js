@@ -23,6 +23,22 @@ describe('INTEGRATION::ShoppingCentre Controller', () => {
     }).then(done);
   });
 
+  let userParams = global.IntegrationTestUser;
+  let authToken;
+
+  beforeEach((done)=> {
+    request(app)
+    .post('/authenticate')
+    .send(userParams)
+    .expect(200)
+    .expect('Content-Type', /json/)
+    .end(function(err, res) {
+      if (err) return done(err);
+      authToken = res.body.token;
+      done();
+    });
+  });
+
   describe('Get shopping centre', () => {
 
     let existingShoppingCentre, requestAttrs;
@@ -50,6 +66,7 @@ describe('INTEGRATION::ShoppingCentre Controller', () => {
     it('should get by id', (done) => {
       request(app)
       .get(`/shopping-centres/${existingShoppingCentre.id}`)
+      .set('x-access-token', authToken)
       .expect(200)
       .expect('Content-Type', /json/)
       .end(function(err, res) {
@@ -65,6 +82,7 @@ describe('INTEGRATION::ShoppingCentre Controller', () => {
   it('should give error for invalid id', (done) => {
       request(app)
       .get('/shopping-centres/999189903')
+      .set('x-access-token', authToken)
       .expect(404)
       .expect('Content-Type', /json/)
       .end(function(err) {
@@ -95,6 +113,7 @@ describe('INTEGRATION::ShoppingCentre Controller', () => {
 
       request(app)
       .post('/shopping-centres/')
+      .set('x-access-token', authToken)
       .send(requestParams)
       .expect(201)
       .expect('Content-Type', /json/)
@@ -136,6 +155,7 @@ describe('INTEGRATION::ShoppingCentre Controller', () => {
 
       request(app)
       .post('/shopping-centres/')
+      .set('x-access-token', authToken)
       .send(requestParams)
       .expect(400)
       .expect('Content-Type', /json/)

@@ -7,6 +7,7 @@ There are 2 main functions for this service:
 -   Managing ShoppingCentre
 -   Managing Assets for ShoppingCentre
 
+
 ## Schema
 
 Refer `src/schemas/schema.js` for detailed JSON schema.
@@ -37,6 +38,7 @@ Refer `src/schemas/schema.js` for detailed JSON schema.
 | /assets/{id}                                            | GET    |
 | /assets                                                 | POST   |
 | /assets/{id}                                            | PUT    |
+| /authenticate                                           | POST   |
 
 
 ## Project Structure
@@ -82,6 +84,45 @@ Refer `src/schemas/schema.js` for detailed JSON schema.
     - `createdb inventory_store_test`
     - `NODE_ENV=test node_modules/.bin/sequelize db:migrate`
 3. `npm test` to run tests
+
+## Sample requests using cURL
+
+##### POST Authenticate User
+```
+curl -X POST \
+  http://localhost:3000/authenticate \
+  -H 'content-type: application/json' \
+  -H 'postman-token: 0dbebd8a-3d43-1702-ac47-fbdd259e54bd' \
+  -d '{
+  "username": "testuser1",
+  "password": "dummy"
+}'
+```
+##### POST Create shopping centre
+```
+curl -X POST \
+  http://localhost:3000/shopping-centres \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: application/json' \
+  -H 'x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsImlhdCI6MTUxMjUwNzg2NywiZXhwIjoxNTEyNTExNDY3fQ.OtQaFY4sB1aj9DDjpXe_9oRykZeL14MM_qM1V5Z6e7Q' \
+  -d '{
+  "name": "Westfield",
+  "address": {
+    "streetNumber": "11",
+    "streetName": "Victoria",
+    "suburb": "Chatswood",
+    "postCode": 2065,
+    "state": "NSW",
+    "country": "AUS"
+  }
+}'
+```
+##### GET shopping centre
+```
+curl -X GET \
+  http://localhost:3000/shopping-centres/169 \
+  -H 'x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsImlhdCI6MTUxMjUwNzg2NywiZXhwIjoxNTEyNTExNDY3fQ.OtQaFY4sB1aj9DDjpXe_9oRykZeL14MM_qM1V5Z6e7Q'
+```
 
 ## Pending Improvements
 1. Enhance Asset model. Schema allows for more properties on the object

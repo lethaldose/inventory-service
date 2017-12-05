@@ -35,6 +35,23 @@ describe('INTEGRATION::Asset Controller', () => {
 
   after((done) => app.close(done));
 
+  let userParams = global.IntegrationTestUser;
+  let authToken;
+
+  beforeEach((done)=> {
+    request(app)
+    .post('/authenticate')
+    .send(userParams)
+    .expect(200)
+    .expect('Content-Type', /json/)
+    .end(function(err, res) {
+      if (err) return done(err);
+      authToken = res.body.token;
+      done();
+    });
+  });
+
+
   beforeEach(function(done) {
    let deleteShoppingCentre = ShoppingCentre.destroy({
       where: {},
@@ -87,6 +104,7 @@ describe('INTEGRATION::Asset Controller', () => {
     it('should get by id', (done) => {
       request(app)
       .get(`/assets/${existingAsset.id}`)
+      .set('x-access-token', authToken)
       .expect(200)
       .expect('Content-Type', /json/)
       .end(function(err, res) {
@@ -103,6 +121,7 @@ describe('INTEGRATION::Asset Controller', () => {
   it('should give error for invalid id', (done) => {
       request(app)
       .get('/assets/999189903')
+      .set('x-access-token', authToken)
       .expect(404)
       .expect('Content-Type', /json/)
       .end(function(err) {
@@ -132,6 +151,7 @@ describe('INTEGRATION::Asset Controller', () => {
 
       request(app)
       .post('/assets/')
+      .set('x-access-token', authToken)
       .send(requestParams)
       .expect(201)
       .expect('Content-Type', /json/)
@@ -167,6 +187,7 @@ describe('INTEGRATION::Asset Controller', () => {
 
       request(app)
       .put(`/assets/${existingAsset.id}`)
+      .set('x-access-token', authToken)
       .send(requestParams)
       .expect(200)
       .expect('Content-Type', /json/)

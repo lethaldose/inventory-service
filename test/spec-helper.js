@@ -9,3 +9,7 @@ process.env.NODE_ENV = 'test';
 
 global.SRC = `${__dirname}/../src`;
 
+global.IntegrationTestUser = {
+    username: 'int-test-user1',
+    password: 'dummy'
+};

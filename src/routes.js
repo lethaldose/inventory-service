@@ -4,7 +4,7 @@ const shoppingCentreController = require('./controllers/shopping-centre');
 const assetsController = require('./controllers/asset');
 const authController = require('./controllers/authentication');
 const schema = require('./schemas/schema');
-const schemaValidator = require('./schemas/schema-validator');
+const schemaValidator = require('./middleware/schema-validator');
 
 exports.create = function(server) {
 
