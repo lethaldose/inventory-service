@@ -29,10 +29,16 @@ describe('Controller: ShoppingCentre', () => {
     });
 
     it('should return a shopping centre for an id', (done) => {
-      let shoppingCentreDetails = {name: 'Westfield', Address: { state: 'NSW'}};
-      let shoppingCentreResponse = {name: 'Westfield', address: { state: 'NSW'}};
+      let shoppingCentreDetails = {id: 99, name: 'Westfield', Address: { state: 'NSW'}};
+      let shoppingCentreResponse = {
+        id: 99, name: 'Westfield', address: { state: 'NSW'},
+        links: {
+          assets: '/shopping-centres/99/assets'
+        }
+      };
+
       let shoppingCentreModelStub = { toJSON: () => {return shoppingCentreDetails; }};
-      request = {params: {id: '999'}};
+      request = {params: {id: 99}};
       ShoppingCentre.findById.returns(Promise.resolve(shoppingCentreModelStub));
 
       controller.get(request, fakeResponse, fakeNext).then( () => {
@@ -56,8 +62,15 @@ describe('Controller: ShoppingCentre', () => {
     });
 
     it('should create a new shopping centre', (done) => {
-      let shoppingCentreModel = {name: 'Westfield', Address: { state: 'NSW'}};
-      let shoppingCentreDetail = {name: 'Westfield', address: { state: 'NSW'}};
+      let shoppingCentreModel = {id: 99, name: 'Westfield', Address: { state: 'NSW'}};
+      let shoppingCentreDetail = {id:99, name: 'Westfield', address: { state: 'NSW'}};
+      let expectedShoppingCentreResponse = {
+          id:99, name: 'Westfield', address: { state: 'NSW'},
+          links: {
+           assets: '/shopping-centres/99/assets'
+          }
+      };
+
       let shoppingCentreModelStub = { toJSON: () => {return shoppingCentreModel; }};
       request.body = shoppingCentreDetail;
 
@@ -66,7 +79,7 @@ describe('Controller: ShoppingCentre', () => {
       controller.create(request, fakeResponse, fakeNext).then ( () =>  {
         fakeNext.should.have.been.called();
         ShoppingCentre.createWithAddress.should.have.been.calledWith(shoppingCentreModel);
-        fakeResponse.send.should.have.been.calledWith(201, shoppingCentreDetail);
+        fakeResponse.send.should.have.been.calledWith(201, expectedShoppingCentreResponse);
         done();
       }).catch(done);
     });

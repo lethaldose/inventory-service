@@ -71,10 +71,9 @@ Refer `src/schemas/schema.js` for detailed JSON schema.
 
 ## Pending Improvements
 1. Enhance Asset model. Schema allows for more properties on the object
-2. Hypermedia links
-3. Docs using Swagger
-4. Tests
+2. API Docs using Swagger
+3. Tests
      - improve test setup
-5. DB improvments
+4. DB improvments
     - whitelisting attributes to update at model level
     - fix foreignKey ShoppingCentreId to be lowercase

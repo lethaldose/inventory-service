@@ -8,6 +8,9 @@ exports.transform = (shoppingCentreModel) => {
     ['updatedAt', 'createdAt', 'Address.createdAt',
     'Address.updatedAt', 'Address.ShoppingCentreId', 'Address.id']);
   response.address = response.Address;
+  response.links = {
+    assets: `/shopping-centres/${response.id}/assets`
+  };
 
   delete(response.Address);
   return response;

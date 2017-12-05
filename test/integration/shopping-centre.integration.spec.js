@@ -102,8 +102,13 @@ describe('INTEGRATION::ShoppingCentre Controller', () => {
         if (err) return done(err);
 
         res.body.id.should.be.a.Number();
-        let responseAttrs = _.omit(res.body, 'id');
-        responseAttrs.should.eql(requestParams);
+        let expectedAttrs = _.extend(requestParams, {
+          id: res.body.id,
+          links: {
+            assets: `/shopping-centres/${res.body.id}/assets`
+          }
+        });
+        res.body.should.eql(expectedAttrs);
         done();
       });
     });
