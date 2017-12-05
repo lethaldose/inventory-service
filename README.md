@@ -64,6 +64,7 @@ Refer `src/schemas/schema.js` for detailed JSON schema.
 3. Setup Development DB
     - `createdb inventory_store_development`
     - `node_modules/.bin/sequelize db:migrate`
+    - `node_modules/.bin/sequelize db:seed:all`
 4. Run `npm start` to start the app
 5. Run `npm test` to run specs
 6. Run `npm run lint` to run es6 linter
@@ -81,6 +82,8 @@ Refer `src/schemas/schema.js` for detailed JSON schema.
 3. grant access
     - `GRANT ALL PRIVILEGES ON DATABASE inventory_store_development to developer;`
 4. Run migrations `node_modules/.bin/sequelize db:migrate`
+5. Create test user and dummy data `node_modules/.bin/sequelize db:seed:all`
+    - Creates dummy users `testuser1/roger@123`
 
 ## Testing
 
@@ -129,6 +132,27 @@ curl -X GET \
   -H 'x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsImlhdCI6MTUxMjUwNzg2NywiZXhwIjoxNTEyNTExNDY3fQ.OtQaFY4sB1aj9DDjpXe_9oRykZeL14MM_qM1V5Z6e7Q'
 ```
 
+#### POST Create Asset
+```
+curl -X POST \
+  http://localhost:3000/assets \
+  -H 'content-type: application/json' \
+  -H 'x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTEyNTE1MTE1LCJleHAiOjE1MTI1MTg3MTV9.rxpMiN2KikGrHipdPsbk2_EPu3pcwKgs4UFBc_amHsY' \
+  -d '{
+      "name": "Asset1",
+      "ShoppingCentreId": 6,
+      "status": "active",
+      "dimensions": {
+        "height": 55,
+        "width": 47,
+        "unit": "cm"
+      },
+      "location": {
+        "floor": "B-2"
+      }
+    }'
+```
+
 ## Pending Improvements
 1. Enhance Asset model. Schema allows for more properties on the object
 2. API Docs using Swagger
@@ -137,3 +161,4 @@ curl -X GET \
 4. DB improvments
     - whitelisting attributes to update at model level
     - fix foreignKey ShoppingCentreId to be lowercase
+5. Route to create users
