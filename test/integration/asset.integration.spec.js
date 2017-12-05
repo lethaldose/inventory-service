@@ -89,7 +89,7 @@ describe('INTEGRATION::Asset Controller', () => {
     return Asset.create(attributes);
   };
 
-  describe.only('Get asset', () => {
+  describe('Get asset', () => {
     let existingAsset;
 
     beforeEach( (done) => {

@@ -66,7 +66,7 @@ Refer `src/schemas/schema.js` for detailed JSON schema.
     - `node_modules/.bin/sequelize db:migrate`
 4. Run `npm start` to start the app
 5. Run `npm test` to run specs
-6. Run `npm lint` to run es6 linter
+6. Run `npm run lint` to run es6 linter
 
 ## Config
 1. App config.js at `src/config.js`

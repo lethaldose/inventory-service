@@ -29,7 +29,6 @@ exports.update = function(req, res, next) {
   let reqAttributes = req.body;
   let userId = req.userId;
   let oldAttributes;
-  console.log(userId);
 
   return Asset.findById(id)
   .then( (assetDetails) => {
